@@ -43,6 +43,22 @@ confs = {
             "sinkhorn_iterations": 50,
         },
     },
+    "superglue-loc": {
+        "output": "matches-superglue-loc",
+        "model": {
+            "name": "superglue",
+            "weights": "indoor",
+            "sinkhorn_iterations": 50,
+        },
+    },
+    "superglue-indoor": {
+        "output": "matches-superglue-indoor",
+        "model": {
+            "name": "superglue",
+            "weights": "indoor",
+            "sinkhorn_iterations": 50,
+        },
+    },
     "superglue-fast": {
         "output": "matches-superglue-it5",
         "model": {
@@ -234,7 +250,7 @@ def match_from_paths(
     loader = torch.utils.data.DataLoader(
         dataset, num_workers=5, batch_size=1, shuffle=False, pin_memory=True
     )
-    writer_queue = WorkQueue(partial(writer_fn, match_path=match_path), 5)
+    writer_queue = WorkQueue(partial(writer_fn, match_path=match_path), 10)
 
     for idx, data in enumerate(tqdm(loader, smoothing=0.1)):
         data = {

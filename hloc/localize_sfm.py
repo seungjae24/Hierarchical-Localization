@@ -102,6 +102,10 @@ def pose_from_cluster(
             if id_3D not in kp_idx_to_3D[idx]:
                 kp_idx_to_3D[idx].append(id_3D)
 
+    if num_matches == 0:
+        logger.info(f"No matches found for {qname}.")
+        return None, None
+
     idxs = list(kp_idx_to_3D.keys())
     mkp_idxs = [i for i in idxs for _ in kp_idx_to_3D[i]]
     mp3d_ids = [j for i in idxs for j in kp_idx_to_3D[i]]
